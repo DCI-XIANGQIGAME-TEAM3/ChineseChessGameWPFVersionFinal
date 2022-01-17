@@ -7,25 +7,21 @@ namespace Control
     {
         public override bool ChessMovingRule(int CurrentX, int CurrentY, int OriginalX, int OriginalY, Chess[,] Matrix)
         {
-            //ProgramControl con = new ProgramControl();
             int min, max; //use min to record the small coordinate and max to record the big coordinate
-            //如果是Y坐标发生改变
+            //if the Y coordinate changes
             if (OriginalX == CurrentX)
             {
-                if (OriginalY < CurrentY) // 向右移动
+                if (OriginalY < CurrentY) // move left
                 {
-                    //如果原来的y小于移动后的y i就等于原来的y
                     min = OriginalY;
                     max = CurrentY;
                 }
-                else //向左移动
+                else //move right
                 {
-                    //如果原来的y大于移动后的y j就等于原来的y
                     min = CurrentY;
                     max = OriginalY;
-                    // 右移（原来的y小于现在的）i原来的y，j现在的y
                 }
-                //原来的和现在的y坐标之间不能有棋子 
+                //There can be no pieces between the original and current y coordinates
                 for (int i = min + 1; i < max; i++)
                 {
                     if (Matrix[CurrentX, i].side != Chess.Player.blank)
@@ -37,17 +33,17 @@ namespace Control
             }
             else if (OriginalY == CurrentY)
             {
-                if (OriginalX < CurrentX) //向下移动
+                if (OriginalX < CurrentX) //Move down
                 {
                     min = OriginalX;
                     max = CurrentX;
                 }
-                else //向上移动
+                else //Move up
                 {
                     min = CurrentX;
                     max = OriginalX;
                 }
-                //原来的和现在的y坐标之间不能有棋子
+                //There can be no pieces between the original and current x coordinates
                 for (int i = min + 1; i < max; i++)
                 {
                     if (Matrix[i, CurrentY].side != Chess.Player.blank)
@@ -57,12 +53,12 @@ namespace Control
                 }
 
             }
-                //不能吃掉自己的棋子
+                //can't eat your own chess pieces
                 if (Matrix[OriginalX, OriginalY].side == Matrix[CurrentX, CurrentY].side)
             {
                 return false;
             }
-            //不能X坐标和Y坐标同时发生改变
+            //The X and Y coordinates cannot be changed at the same time
             if (OriginalX != CurrentX && OriginalY != CurrentY)
             {
                 return false;
