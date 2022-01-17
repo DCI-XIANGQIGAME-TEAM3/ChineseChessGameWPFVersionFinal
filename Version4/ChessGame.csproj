@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="UserInterface\background.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="UserInterface\App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="UserInterface\App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="UserInterface\background.png" />
+  </ItemGroup>
+
+</Project>
