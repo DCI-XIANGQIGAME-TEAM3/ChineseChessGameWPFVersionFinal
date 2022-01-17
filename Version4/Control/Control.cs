@@ -88,7 +88,7 @@ namespace Control
             {
                 for (int row = 0; row < 9; row++)
                 {
-                    trans[col, row] = new Chess();            
+                    trans[col, row] = new Chess();     //temporary variable--> prevent the piece from moving before arriving at its new position      
                 }
             }
 
