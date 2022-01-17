@@ -9,29 +9,29 @@ namespace Control
         public override bool ChessMovingRule(int CurrentX, int CurrentY, int OriginalX, int OriginalY, Chess[,] Matrix)
         {
             int min, max, k, num=0;
-            //不能斜着走 X,Y坐标不能同时改变
+            // Can't walk diagonally(X, Y coordinates cannot be changed at the same time)
             if (CurrentX != OriginalX && CurrentY != OriginalY)
             {
                 return false;
             }
 
-            if (OriginalX == CurrentX)
+            if (OriginalX == CurrentX) // move Y coordinate
             {
                 if (OriginalY < CurrentY)
                 {
-                    //如果原来的y小于移动后的y i就等于原来的y
+                    // If the OriginalY is less than the CurrentY, min is equal to the OriginalY
                     min = OriginalY;
                     max = CurrentY;
                 }
                 else
                 {
-                    //如果原来的y大于移动后的y j就等于原来的y
+                    // If the OriginalY is greater than the CurrentY, min is equal to the CurrentY
                     min = CurrentY;
                     max = OriginalY;
-                    // 右移（原来的y小于现在的）i原来的y，j现在的y
+                 
                 }
                 num = 0;
-                //n就是他原来位置和现在位置中间的棋子数量
+                // Number of chess between CurrentY and OriginalY
                 for (k = min + 1; k < max; k++)
                 {
                     if (Matrix[CurrentX, k].side != Chess.Player.blank)
@@ -40,7 +40,7 @@ namespace Control
                     }
                 }
             }
-            else if (OriginalY == CurrentY)
+            else if (OriginalY == CurrentY) // move X coordinate
             {
                 if (OriginalX < CurrentX)
                 {
@@ -64,22 +64,22 @@ namespace Control
                 }
             }
 
-            //如果中间的棋子数量大于一个的话 说明不能移动
+            // If the number of chess in the middle is more than one, it means that it cannot be moved
             if (num > 1)
             {
                 return false;
             }
-            //CurrentX,CurrentY  为移动后的坐标 中间没有棋子且移动后的坐标不是空的
+            // It can't moved if CurrentX and CurrentY have chess
             if (num == 0 && Matrix[CurrentX, CurrentY].side != Chess.Player.blank)
             {
                 return false;
             }
-            //中间有一个棋子，且移动后的坐标是空的
+            // There is a chess in the middle, but the CurrentX and CurrentY are empty
             if (num == 1 && Matrix[CurrentX, CurrentY].side == Chess.Player.blank)
             {
                 return false;
             }
-            //不能吃掉自己方的棋子
+            // Cannot capture chess from the same side
             if (Matrix[OriginalX, OriginalY].side == Matrix[CurrentX, CurrentY].side)
             {
                 return false;
