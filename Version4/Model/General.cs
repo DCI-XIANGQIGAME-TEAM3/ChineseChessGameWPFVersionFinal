@@ -8,7 +8,7 @@ namespace Control
         public override bool ChessMovingRule(int CurrentX, int CurrentY, int OriginalX, int OriginalY, Chess[,] Matrix)
         {
             int min, max, k;
-            //飞将军
+            // flying general
             if (Matrix[CurrentX, CurrentY].type == Chess.Piecetype.jiang && OriginalY == CurrentY)
             {
                 if (OriginalX < CurrentX)
@@ -22,28 +22,28 @@ namespace Control
                     max = OriginalX;
                 }
 
-                for (k = min + 1; k < max; k++)
+                for (k = min + 1; k < max; k++) // Are there any chess between the two generals
                 {
-                    //两个将军之间有棋子时不能飞将
+                    // You cannot fly when there are chess between two generals
                     if (Matrix[k, CurrentY].side != Chess.Player.blank)
                     {
                         return false;
                     }
                 }
 
-                //为了在飞将时避免被下面的条件限制
+                // In order to avoid being restricted by the following conditions when flying
                 ProgramControl.SetMove(CurrentX, CurrentY, OriginalX, OriginalY, Matrix);
 
                 return true;
             }
 
-            //  不能吃自己的棋子
+            // Cannot capture chess from the same side
             if (Matrix[OriginalX, OriginalY].side == Matrix[CurrentX, CurrentY].side)
             {
                 return false;
             }
 
-            // 将不能出田字格
+            // General cannot move out of middle of "田"
             if (Matrix[OriginalX, OriginalY].side == Chess.Player.red)
             {
                 if (CurrentY < 3 || CurrentY > 5 || CurrentX < 7)
@@ -59,7 +59,7 @@ namespace Control
                 }
             }
 
-            //只能水平移动或是竖着移动
+            // It can only move horizontally or vertically ,and move one unit
             if (Math.Abs(OriginalX - CurrentX) + Math.Abs(OriginalY - CurrentY) != 1)
             {
                 return false;
