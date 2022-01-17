@@ -8,7 +8,8 @@ namespace Control
     {
         public bool Result(Chess[,] Matrix)
         {
-            int count = 0;
+            int count = 0;    //count means the number of the piece general
+            
             //traverse the upper grid where the piece general can move
             for (int i = 0; i <= 2; i++)
             {
@@ -27,7 +28,7 @@ namespace Control
                         count++;
                 }
             }
-            if (count == 2)   //count means the number of the piece general
+            if (count == 2)
                 return false;
             else
                 return true;
