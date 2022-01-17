@@ -7,28 +7,27 @@ namespace Control
     {
         public override bool ChessMovingRule(int CurrentX, int CurrentY, int OriginalX, int OriginalY, Chess[,] Matrix)
         {
-            //ProgramControl con = new ProgramControl();
-            //不能吃掉自己的棋子，也就是两方的side不能一样                                   //小兵的X坐标和Y坐标不能同时发生改变 不能斜着走
+            //can't eat your own chess pieces                                           //The X and Y coordinates cannot be changed at the same time
             if (Matrix[OriginalX, OriginalY].side == Matrix[CurrentX, CurrentY].side || (CurrentX != OriginalX && CurrentY != OriginalY))
             {
                 return false;
             }
-            //判断红黑方 
+            //Judge red and black side 
             if (Matrix[OriginalX, OriginalY].side == Chess.Player.red)
-            {   //没过河
-                if (OriginalX > 4 && OriginalX - CurrentX != 1) //过河后不能往后退，只能向前移动一格
+            {   //not cross the river
+                if (OriginalX > 4 && OriginalX - CurrentX != 1) //You can't go back after crossing the river. You can only move forward one space
                 {
                     return false;
                 }
-                //过了河
+                //cross the river
                 if (OriginalX < 5)
                 {
-                    //兵一次只能向左或右移动一个格子
+                    //Soldiers can only move one grid left or right at a time
                     if (CurrentX == OriginalX && Math.Abs(CurrentY - OriginalY) != 1)
                     {
                         return false;
                     }
-                    //兵只能向前走一个格子
+                    //Soldiers can only move forward one grid
                     if (CurrentY == OriginalY && OriginalX - CurrentX != 1)
                     {
                         return false;
@@ -36,23 +35,21 @@ namespace Control
                 }
             }
             else if (Matrix[OriginalX, OriginalY].side == Chess.Player.black)
-            {   //位置为黑方，也即选中的棋子是黑方小兵，棋盘上方
-
-                //chozen x<10 小兵不能往回走 一次不能往前走两个格 ==2说明走了一个格子
-                //没过河
+            {   
+                //not cross the river
                 if (OriginalX < 5 && CurrentX - OriginalX != 1)
                 {
                     return false;
                 }
-                //过了河
+                //cross the river
                 if (OriginalX > 4)
                 {
-                    //兵一次只能向左或右移动一个格子
+                    //Soldiers can only move one grid left or right at a time
                     if (CurrentX == OriginalX && Math.Abs(CurrentY - OriginalY) != 1)
                     {
                         return false;
                     }
-                    //兵只能向前走一个格子
+                    //Soldiers can only move forward one grid
                     if (CurrentY == OriginalY && CurrentX - OriginalX != 1)
                     {
                         return false;
