@@ -8,10 +8,9 @@ namespace Control
     {
         public override bool ChessMovingRule(int CurrentX, int CurrentY, int OriginalX, int OriginalY, Chess[,] Matrix)
         {
-            //ProgramControl con = new ProgramControl();
-            //横着走(曰)
+            //Walk Horizontally
             Boolean YMoving = Math.Abs(OriginalX - CurrentX) == 1 && Math.Abs(OriginalY - CurrentY) == 2; //if it satisfied then it is true or will be false
-            //竖着走（日）
+            //Walk Vertically
             Boolean XMoving = Math.Abs(OriginalX - CurrentX) == 2 && Math.Abs(OriginalY - CurrentY) == 1; //if it satisfied then it is true or will be false
 
             switch (XMoving || YMoving)
@@ -19,14 +18,14 @@ namespace Control
                 case true:
                     if (XMoving)
                     {
-                        if (Matrix[(OriginalX + CurrentX) / 2, OriginalY].side != Chess.Player.blank) //有棋子挡住时不能走
+                        if (Matrix[(OriginalX + CurrentX) / 2, OriginalY].side != Chess.Player.blank) //You can't walk when there are chess pieces in the way
                         {
                             return false;
                         }
                     }
                     if (YMoving)
                     {
-                        if (Matrix[OriginalX, (OriginalY + CurrentY) / 2].side != Chess.Player.blank) //有棋子挡住时不能走
+                        if (Matrix[OriginalX, (OriginalY + CurrentY) / 2].side != Chess.Player.blank) //You can't walk when there are chess pieces in the way
                         {
                             return false;
                         }
@@ -36,7 +35,7 @@ namespace Control
                     return false;
             }
 
-            //不能吃掉自己方的棋子
+            //can't eat your own chess pieces
             if (Matrix[OriginalX, OriginalY].side == Matrix[CurrentX, CurrentY].side)
             {
                 return false;
