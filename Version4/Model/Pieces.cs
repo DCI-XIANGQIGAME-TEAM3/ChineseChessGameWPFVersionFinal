@@ -6,7 +6,7 @@ namespace Model
     public class ProgramModel
     {
 
-        public Chess[,] setPosition()   //设置棋子位置
+        public Chess[,] setPosition()   //Set chess piece position
         {
             Chess[,] Matrix = new Chess[10, 9];
             for (int col = 0; col < 10; col++)
@@ -22,22 +22,22 @@ namespace Model
             }
             for (int row = 0; row < 9; row++)
             {
-                Matrix[0, row].side = Chess.Player.black; //第一行是黑方
-                Matrix[9, row].side = Chess.Player.red; //第九行是红方
+                Matrix[0, row].side = Chess.Player.black; //The first line is black side
+                Matrix[9, row].side = Chess.Player.red; //The ninth line is the Red side
                 if (row == 1 || row == 7)
                 {
-                    Matrix[2, row].side = Chess.Player.black; //黑方(的炮)
-                    Matrix[7, row].side = Chess.Player.red; //红方(的炮)
+                    Matrix[2, row].side = Chess.Player.black; //black side(set the cannon pieces)
+                    Matrix[7, row].side = Chess.Player.red; //red side(set the cannon pieces)
                 }
                 else if (row % 2 == 0)
                 {
-                    Matrix[3, row].side = Chess.Player.black; //隔一个格放置黑方(的兵)
-                    Matrix[6, row].side = Chess.Player.red; //隔一个格放置红方(的兵)
+                    Matrix[3, row].side = Chess.Player.black; //Place the black side one space apart(set the soldier pieces)
+                    Matrix[6, row].side = Chess.Player.red; //Place the red side one space apart(set the soldier pieces)
                 }
             }
             for (int col = 0; col < 10; col++)
             {
-                if (col == 0 || col == 9) //第一行和第九行放置依次放置棋子
+                if (col == 0 || col == 9) //The first line and the ninth line place chess pieces in turn
                 {
                     Matrix[col, 0].type = Chess.Piecetype.che;
                     Matrix[col, 1].type = Chess.Piecetype.ma;
@@ -49,12 +49,12 @@ namespace Model
                     Matrix[col, 7].type = Chess.Piecetype.ma;
                     Matrix[col, 8].type = Chess.Piecetype.che;
                 }
-                else if (col == 2 || col == 7) //第二行和第七行放置炮
+                else if (col == 2 || col == 7) //Place cannon in the second and seventh rows
                 {
                     Matrix[col, 1].type = Chess.Piecetype.pao;
                     Matrix[col, 7].type = Chess.Piecetype.pao;
                 }
-                else if (col == 3 || col == 6) //第三行和第六行依次放置兵
+                else if (col == 3 || col == 6) //The third and sixth rows place soldiers in turn
                 {
                     for (int row = 0; row < 9; row++)
                     {
@@ -67,7 +67,7 @@ namespace Model
             }
             return Matrix;
         }
-        public Chess[,] SetRoad()          //初始化并设置棋子的路径
+        public Chess[,] SetRoad()          //Initialize and set the path of the chess piece
         {
             Chess[,] road = new Chess[10, 9];
 
@@ -77,7 +77,7 @@ namespace Model
                 {
                     road[i, j] = new Chess
                     {
-                        path = Chess.Piecepath.not  //初设路径为不可移动，需判断可移动后在赋值为yes
+                        path = Chess.Piecepath.not  //If the path is initially set to be immovable, it needs to be judged to be movable and then assigned as yes
                     };
                 }
             }
