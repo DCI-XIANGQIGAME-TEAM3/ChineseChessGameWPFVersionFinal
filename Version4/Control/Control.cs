@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Model;
 
 
@@ -9,7 +9,7 @@ namespace Control
         public bool Result(Chess[,] Matrix)
         {
             int count = 0;
-            //遍历上方田字格
+            //traverse the upper grid where the piece general can move
             for (int i = 0; i <= 2; i++)
             {
                 for (int j = 3; j <= 5; j++)
@@ -18,7 +18,7 @@ namespace Control
                         count++;
                 }
             }
-            //遍历下方田字格
+            //traverse the lower grid where the piece general can move
             for (int i = 7; i <= 9; i++)
             {
                 for (int j = 3; j <= 5; j++)
@@ -34,9 +34,9 @@ namespace Control
         }
 
 
-        public bool MovePiece(int CurrentX, int CurrentY, int OriginalX, int OriginalY, Chess[,] Matrix)//定义每种棋子的移动方式,这里是调用pieceControl中的棋子
+        public bool MovePiece(int CurrentX, int CurrentY, int OriginalX, int OriginalY, Chess[,] Matrix)
+        //define the rules of how each specific piece moves
         {
-            //实例化棋子
             Advisor advisor = new();
             Cannon cannon = new();
             Elephant elephant = new();
@@ -81,7 +81,7 @@ namespace Control
             ProgramModel mod = new();                  
             Chess[,] road = mod.SetRoad();            
             Chess[,] trans = new Chess[10, 9];         
-            bool cr;
+            bool feasibleRoad;
 
             for (int col = 0; col < 10; col++)                
             {
@@ -98,9 +98,9 @@ namespace Control
                     trans[col, row].type = Matrix[col, row].type;              
                     trans[chozenX, chozenY].side = Matrix[chozenX, chozenY].side;      
                     trans[chozenX, chozenY].type = Matrix[chozenX, chozenY].type;      
-                    cr = MovePiece(col, row, chozenX, chozenY, Matrix);                 
+                    feasibleRoad = MovePiece(col, row, chozenX, chozenY, Matrix);                 
 
-                    if (cr)     //cr为真
+                    if (feasibleRoad)
                     {
                         road[col, row].path = Chess.Piecepath.yes;      
                     }
@@ -113,15 +113,16 @@ namespace Control
                 }
             }
 
-            return road;            //返回road即可行路径
+            return road;
         }
 
-        public static void SetMove(int CurrentX, int CurrentY, int OriginalX, int OriginalY, Chess[,] Matrix)       //基本移动方式
+        public static void SetMove(int CurrentX, int CurrentY, int OriginalX, int OriginalY, Chess[,] Matrix)
+        //basic rules of movements
         {
             Matrix[CurrentX, CurrentY].side = Matrix[OriginalX, OriginalY].side;
-            Matrix[CurrentX, CurrentY].type = Matrix[OriginalX, OriginalY].type;
+            Matrix[CurrentX, CurrentY].type = Matrix[OriginalX, OriginalY].type;   //eat piece
             Matrix[OriginalX, OriginalY].side = Chess.Player.blank;
-            Matrix[OriginalX, OriginalY].type = Chess.Piecetype.blank;
+            Matrix[OriginalX, OriginalY].type = Chess.Piecetype.blank;  //put the piece on the empty grid
         }
 
 
