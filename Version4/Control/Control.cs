@@ -27,7 +27,7 @@ namespace Control
                         count++;
                 }
             }
-            if (count == 2)
+            if (count == 2)   //count means the number of the piece general
                 return false;
             else
                 return true;
@@ -76,7 +76,8 @@ namespace Control
         }
 
 
-        public Chess[,] Road(int chozenX, int chozenY, Chess[,] Matrix)
+        public Chess[,] Road(int chozenX, int chozenY, Chess[,] Matrix)     
+        //provide the feasible road for the chosen piece
         {
             ProgramModel mod = new();                  
             Chess[,] road = mod.SetRoad();            
@@ -112,7 +113,6 @@ namespace Control
 
                 }
             }
-
             return road;
         }
 
@@ -120,12 +120,9 @@ namespace Control
         //basic rules of movements
         {
             Matrix[CurrentX, CurrentY].side = Matrix[OriginalX, OriginalY].side;
-            Matrix[CurrentX, CurrentY].type = Matrix[OriginalX, OriginalY].type;   //eat piece
+            Matrix[CurrentX, CurrentY].type = Matrix[OriginalX, OriginalY].type;   //eat other piece
             Matrix[OriginalX, OriginalY].side = Chess.Player.blank;
             Matrix[OriginalX, OriginalY].type = Chess.Piecetype.blank;  //put the piece on the empty grid
         }
-
-
     }
-
 }
