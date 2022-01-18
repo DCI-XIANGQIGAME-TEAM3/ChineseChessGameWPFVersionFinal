@@ -29,8 +29,7 @@ namespace Control
                     min = CurrentY;
                     max = OriginalY;
                  
-                }
-                num = 0;
+                } 
                 // Number of chess between CurrentY and OriginalY
                 for (k = min + 1; k < max; k++)
                 {
@@ -52,8 +51,6 @@ namespace Control
                     min = CurrentX;
                     max = OriginalX;
                 }
-
-                num = 0;
 
                 for (k = min + 1; k < max; k++)
                 {
