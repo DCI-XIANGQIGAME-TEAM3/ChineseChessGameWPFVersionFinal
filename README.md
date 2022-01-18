@@ -1,4 +1,4 @@
 # ChineseChessGameWPFVersionFinal
-This is our final Chinese WPF Version Chess Game. The executable file is in the file Chinese XiangQi_net5.0/Chinese XiangQi_net5.0 or click the Rleases and download the zip directly.
+This is our final Chinese WPF Version Chess Game. The executable file is in the file Wpf_Executable_file or click the Rleases and download the zip directly.
 Please enjoy it.
 PS. All of us use Visual Studio to code
